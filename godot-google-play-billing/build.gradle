@@ -6,17 +6,22 @@ ext.pluginVersionCode = 5
 ext.pluginVersionName = "1.2.0"
 
 android {
-    compileSdkVersion 31
-    buildToolsVersion "30.0.3"
-
+    compileSdk 34
+    //buildToolsVersion '34.0.0'
+    namespace "org.godotengine.godot.plugin.googleplaybilling"
     defaultConfig {
-        minSdkVersion 18
-        targetSdkVersion 31
+        minSdkVersion 21
+        targetSdkVersion 34
         versionCode pluginVersionCode
         versionName pluginVersionName
     }
+    ndkVersion '23.2.8568313'
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
 
-    libraryVariants.all { variant ->
+    libraryVariants.configureEach { variant ->
         variant.outputs.all { output ->
             output.outputFileName = "GodotGooglePlayBilling.$pluginVersionName.${variant.name}.aar"
         }
@@ -25,6 +30,14 @@ android {
 
 dependencies {
     implementation "androidx.legacy:legacy-support-v4:1.0.0"
-    implementation 'com.android.billingclient:billing:5.2.1'
+    implementation 'com.android.billingclient:billing:7.0.0'
     compileOnly fileTree(dir: 'libs', include: ['godot-lib*.aar'])
+}
+
+tasks.register('buildIntoRelease', Copy) {
+    group = "build"
+    dependsOn tasks.build
+    from([buildDir.absolutePath, 'outputs', 'aar'].join(File.separator))
+    include("GodotGooglePlayBilling.${pluginVersionName}.release.aar")
+    into([rootDir.absolutePath, 'release'].join(File.separator))
 }

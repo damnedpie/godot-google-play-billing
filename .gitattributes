@@ -1,0 +1,16 @@
+# Auto detect text files and perform LF normalization
+* text=auto eol=lf
+
+# Common
+*.csv text eol=lf
+*.md text eol=lf
+*.cfg text eol=lf
+*.txt text eol=lf
+
+# Godot-specific
+*.tscn text eol=lf
+*.tres text eol=lf
+*.import text eol=lf
+*.godot text eol=lf
+*.shader text eol=lf
+*.gdignore text eol=lf

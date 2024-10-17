@@ -1,0 +1,12 @@
+[config]
+
+name="GodotGooglePlayBilling"
+binary_type="local"
+binary="GodotGooglePlayBilling.1.2.0.release.aar"
+
+[dependencies]
+remote=[
+	"com.android.billingclient:billing:7.0.0",
+	"androidx.legacy:legacy-support-v4:1.0.0"
+	]
+custom_maven_repos=[]

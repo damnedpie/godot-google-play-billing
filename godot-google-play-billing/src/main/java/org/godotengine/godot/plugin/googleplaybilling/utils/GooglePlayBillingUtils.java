@@ -49,9 +49,10 @@ public class GooglePlayBillingUtils {
 		dictionary.put("purchase_token", purchase.getPurchaseToken());
 		dictionary.put("quantity", purchase.getQuantity());
 		dictionary.put("signature", purchase.getSignature());
+		dictionary.put("developer_payload", purchase.getDeveloperPayload());
 		// PBL V4 replaced getSku with getSkus to support multi-sku purchases,
 		// use the first entry for "sku" and generate an array for "skus"
-		ArrayList<String> skus = purchase.getSkus();
+		List<String> skus = purchase.getProducts();
 		dictionary.put("sku", skus.get(0));
 		String[] skusArray = skus.toArray(new String[0]);
 		dictionary.put("skus", skusArray);

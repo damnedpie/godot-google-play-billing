@@ -1,18 +1,18 @@
 # godot-google-play-billing
 Godot Android plugin for the Google Play Billing library
 
+## Differences from master branch
+
+- Library 7.0.0 is used to adhere to Googla Play's policies about library deprecations
+- Purchase dictionary includes "developer_payload" field which is required by many attribution SDKs to track IAPs
 
 ## Usage & Docs
 
 You can find the docs for this first-party plugin in the [official Godot docs](https://docs.godotengine.org/en/stable/tutorials/platform/android_in_app_purchases.html).
 
+You can use contents of the ``release`` folder for project integration, I update them with every commit.
 
 ## Compiling
-
-Prerequisites:
-
-- Android SDK (platform version 30)
-- the Godot Android library (`godot-lib.***.release.aar`) for your version of Godot from the [downloads page](https://godotengine.org/download).
 
 Steps to build:
 
