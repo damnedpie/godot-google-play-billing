@@ -1,25 +1,54 @@
-// Top-level build file where you can add configuration options common to all sub-projects/modules.
-buildscript {
-    repositories {
-        google()
-        mavenCentral()
-    }
-    dependencies {
-        //noinspection AndroidGradlePluginVersion
-        classpath "com.android.tools.build:gradle:8.2.0"
+plugins {
+    id 'com.android.library'
+}
 
-        // NOTE: Do not place your application dependencies here; they belong
-        // in the individual module build.gradle files
+ext.pluginVersionCode = 1
+ext.pluginVersionName = "7.1.1"
+
+android {
+    namespace "org.godotengine.godot.plugin.googleplaybilling"
+    compileSdk 35
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+    defaultConfig {
+        minSdkVersion 21
+        targetSdkVersion 35
+        versionCode pluginVersionCode
+        versionName pluginVersionName
+        consumerProguardFiles("proguard-rules.pro")
+    }
+    buildTypes {
+        debug {
+            minifyEnabled false
+        }
+        release {
+            minifyEnabled false
+        }
+    }
+    ndkVersion '28.1.13356709'
+    buildToolsVersion '35.0.0'
+    libraryVariants.configureEach { variant ->
+        variant.outputs.all { output ->
+            output.outputFileName = "GodotGooglePlayBilling.$pluginVersionName.${variant.name}.aar"
+        }
     }
 }
 
-allprojects {
-    repositories {
-        google()
-        mavenCentral()
-    }
+dependencies {
+    // Getting Godot dependency locally
+    //compileOnly fileTree(dir:"libs", include:["godot-lib.release.aar"])
+    // Intended way of getting Godot dependencies
+    compileOnly 'org.godotengine:godot:3.6.2.stable'
+    implementation "androidx.legacy:legacy-support-v4:1.0.0"
+    implementation 'com.android.billingclient:billing:7.1.1'
 }
 
-tasks.register('clean', Delete) {
-    delete rootProject.buildDir
+tasks.register('buildIntoRelease', Copy) {
+    group = "build"
+    dependsOn tasks.build
+    from([buildDir.absolutePath, 'outputs', 'aar'].join(File.separator))
+    include("GodotGooglePlayBilling.${pluginVersionName}.release.aar")
+    into([rootDir.absolutePath, 'release'].join(File.separator))
 }

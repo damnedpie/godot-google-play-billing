@@ -3,7 +3,7 @@ Godot Android plugin for the Google Play Billing library
 
 ## Differences from master branch
 
-- Library 7.0.0 is used to adhere to Googla Play's policies about library deprecations
+- Library 7.1.1 is used to adhere to Google Play's policies about library deprecations
 - Purchase dictionary includes "developer_payload" field which is required by many attribution SDKs to track IAPs
 
 ## Usage & Docs
