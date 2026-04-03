@@ -3,3 +3,5 @@
 build/
 local.properties
 libs/
+github-meta.txt
+release/*.zip
